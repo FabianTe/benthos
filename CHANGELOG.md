@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Add `Content-Type` headers in streams API responses
+- Add `Content-Type` header for JSON API responses
 
 ## 3.34.0 - 2020-11-20
 
