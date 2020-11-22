@@ -103,6 +103,7 @@ func New(
 			w.WriteHeader(http.StatusBadGateway)
 			return
 		}
+		w.Header().Set("Content-Type", "application/json")
 		w.Write(resBytes)
 	}
 
@@ -112,11 +113,13 @@ func New(
 			w.WriteHeader(http.StatusBadGateway)
 			return
 		}
+		w.Header().Set("Content-Type", "application/yaml")
 		w.Write(resBytes)
 	}
 
 	handleVersion := func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(fmt.Sprintf("{\"version\":\"%v\", \"built\":\"%v\"}", version, dateBuilt)))
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(fmt.Sprintf(`{"version":"%v", "build": "%v"}`, version, dateBuilt)))
 	}
 
 	handleEndpoints := func(w http.ResponseWriter, r *http.Request) {
@@ -127,6 +130,7 @@ func New(
 		if err != nil {
 			w.WriteHeader(http.StatusBadGateway)
 		} else {
+			w.Header().Set("Content-Type", "application/json")
 			w.Write(resBytes)
 		}
 	}
